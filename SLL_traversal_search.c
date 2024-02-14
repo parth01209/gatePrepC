@@ -11,8 +11,9 @@ struct node{
 // Generally we create pointers to the node because we want to create nodes dynamically at 
 
 Node *GetNode(); // This function returns pointer to the Node structure. whenever we want to create node, we can use start = GetNode();
-
-void Display(Node *start); //Argument to display function is pointer to the first node
+void Display(Node *start); // Argument to display function is pointer to the first node
+void Search(Node *start, int val); 
+int count(Node *start);
 
 Node *GetNode(){
     Node *temp;
@@ -41,8 +42,34 @@ void Display(Node *start){
     printf("\n\n");
 }
 
+void Search(Node *start, int val){
+    Node *p = start; //temporary pointer pointing to same thing where start is pointing
+    int pos = 1; //Like index of the required element
+    while(p!=NULL){
+        if(p->data == val){
+            printf("Value found at position %d\n", pos);
+            return;
+        }
+        p = p->link;
+        pos++;
+    }
+    printf("Element not found\n");
+}
+
+int count(Node *start){
+    int counter = 0;
+    Node *p = start;
+    while(p!=NULL){
+        p = p->link;
+        counter++;
+    }
+    return counter; 
+}
+
 int main(){
-    Node *start, *middle, *last; //These are all pointers to the node structures
+    int value;
+    Node *start, *middle, *last;
+     //These are all pointers to the node structures
     start = GetNode(); // start will hod address of particular node. Node created by GetNode() function (temp) is now pointed at by start
     // i.e. start is pointing to that node
     middle = GetNode();
@@ -54,6 +81,11 @@ int main(){
     last->data = 5;
     last->link = NULL;
     Display(start); // Display function will create pointer p which will point to start, print data, point to p->link.
+    printf("Enter the element to be searched : ");
+    scanf(" %d", &value);
+    Search(start, value);
+    printf("\nNumber of elements in linked list: %d \n",count(start));
+
 
     return 0;
 
@@ -63,3 +95,8 @@ int main(){
 
 // List is :
 // 25 15 5
+
+// Enter the element to be searched : 5
+// Value found at position 3
+
+// Number of elements in linked list: 3
