@@ -14,6 +14,8 @@ Node *GetNode(); // This function returns pointer to the Node structure. wheneve
 void Display(Node *start); // Argument to display function is pointer to the first node
 void Search(Node *start, int val); 
 int count(Node *start);
+Node *insertAtBeg(Node* start, int val);
+
 
 Node *GetNode(){
     Node *temp;
@@ -66,20 +68,36 @@ int count(Node *start){
     return counter; 
 }
 
+Node *insertAtBeg(Node* start, int val){
+    Node *temp = GetNode();
+    if(temp){
+        temp->data =val;
+        temp->link = start;
+        start = temp;
+    }
+    return start;
+}
+
 int main(){
     int value;
-    Node *start, *middle, *last;
+    // Node *start, *middle, *last;
      //These are all pointers to the node structures
-    start = GetNode(); // start will hod address of particular node. Node created by GetNode() function (temp) is now pointed at by start
+    // start = GetNode(); // start will hove address of particular node. Node created by GetNode() function (temp) is now pointed at by start
     // i.e. start is pointing to that node
-    middle = GetNode();
-    last = GetNode();
-    start->data = 25;
-    start->link = middle;
-    middle->data = 15;
-    middle->link = last;
-    last->data = 5;
-    last->link = NULL;
+    // middle = GetNode();
+    // last = GetNode();
+    // start->data = 25;
+    // start->link = middle;
+    // middle->data = 15;
+    // middle->link = last;
+    // last->data = 5;
+    // last->link = NULL;
+    Node *head = NULL;
+
+    head = insertAtBeg(head, 15);
+    head = insertAtBeg(head, 10);
+    head = insertAtBeg(head, 5);
+
     Display(start); // Display function will create pointer p which will point to start, print data, point to p->link.
     printf("Enter the element to be searched : ");
     scanf(" %d", &value);
